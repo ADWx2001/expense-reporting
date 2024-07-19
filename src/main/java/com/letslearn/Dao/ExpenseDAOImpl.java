@@ -16,11 +16,12 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 
     @Override
     public void saveExpense(Expense expense) {
-        String query = "INSERT INTO expenses (date, amount, machine) VALUES (?, ?, ?)";
+        String query = "INSERT INTO expenses (date, amount, machine, reason) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, expense.getDate());
             stmt.setDouble(2, expense.getAmount());
             stmt.setString(3, expense.getMachine());
+            stmt.setString(4, expense.getReason());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,6 +43,7 @@ public class ExpenseDAOImpl implements ExpenseDAO {
                 expense.setDate(rs.getString("date"));
                 expense.setAmount(rs.getDouble("amount"));
                 expense.setMachine(rs.getString("machine"));
+                expense.setReason(rs.getString("reason"));
                 expenses.add(expense);
             }
         } catch (SQLException e) {

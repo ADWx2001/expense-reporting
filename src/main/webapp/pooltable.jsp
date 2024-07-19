@@ -18,7 +18,7 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tubz</title>
+    <title>Pool Table</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -26,7 +26,7 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
 </head>
 <body>
     <div class="container mt-5 mb-10">
-        <h1>Tubz</h1>
+        <h1>Pool Table</h1>
         <div class="d-flex justify-content-between mb-4">
             <a href="main.jsp" class="btn btn-primary">Back to Main</a>
             <a href="reporting.jsp" class="btn btn-primary">Reporting</a>
@@ -39,34 +39,34 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
         <div class="row">
              <div class="d-flex justify-content-start">
             	<div class="col-5 ">
-            	<h3 class="mt-5">Add Collection to Tubz</h3>
-	            	<form action="tubzServlet" method="POST" class="mt-4">
+            	<h3 class="mt-5">Add collection to pool table</h3>
+	            	<form action="PoolTableServlet" method="POST" class="mt-4">
 	                    <div class="form-group">
 	                        <label for="date">Date</label>
-	                        <input type="date" class="form-control" id="date" name="date" required>
+	                        <input type="date" class="form-control" id="date" name="date" placeholder="Date" required>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="amount">Amount</label>
-	                        <input type="number" class="form-control" id="amount" name="amount" required>
+	                        <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount" required>
 	                    </div>
 	                    <button type="submit" class="btn btn-success mt-2">Save</button>
 	                </form>
             	</div>
             	<div class="col-1"></div>
             	<div class="col-5">
-            	<h3 class="mt-5">Add Expense to Tubz</h3>
-            		<form action="tubzServlet" method="POST" class="mt-4">
+            	<h3 class="mt-5">Add expense to pool table</h3>
+            		<form action="PoolTableServlet" method="POST" class="mt-4">
 	                    <div class="form-group">
 	                        <label for="expenseDate">Expense Date</label>
-	                        <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>
+	                        <input type="date" class="form-control" id="expenseDate" name="expenseDate" placeholder="Date" required>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="expenseAmount">Expense Amount</label>
-	                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" required>
+	                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="Amount" required>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="expenseReason">Expense Reason</label>
-	                        <input type="text" class="form-control" id="expenseReason" name="expenseReason" required>
+	                        <input type="text" class="form-control" id="expenseReason" name="expenseReason" placeholder="Reason for expense" required>
 	                    </div>
 	                    <button type="submit" class="btn btn-danger mt-2">Add Expense</button>
 	                </form>

@@ -42,7 +42,7 @@ if (session.getAttribute("auth") != null) {
                 </div>
             </div>
             <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right" style="background-image: url('./assets/images/banner.jpg'); background-repeat: no-repeat; background-size: cover;"></div>
+                <div id="auth-right" style="background-image: url('./assets/images/banner.png'); background-repeat: no-repeat; background-size: cover;"></div>
             </div>
         </div>
     </div>

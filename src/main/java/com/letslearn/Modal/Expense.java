@@ -5,6 +5,7 @@ public class Expense {
     private String date;
     private double amount;
     private String machine;
+    private String reason;
 
     // Getters and Setters
     public int getId() {
@@ -37,5 +38,11 @@ public class Expense {
 
     public void setMachine(String machine) {
         this.machine = machine;
+    }
+    public void setReason(String reason) {
+    	this.reason = reason;
+    }
+    public String getReason() {
+        return reason;
     }
 }

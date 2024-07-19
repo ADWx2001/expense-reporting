@@ -18,7 +18,7 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tubz</title>
+    <title>Fruit Machine</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -26,21 +26,21 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
 </head>
 <body>
     <div class="container mt-5 mb-10">
-        <h1>Tubz</h1>
+        <h1>Fruit Machine</h1>
         <div class="d-flex justify-content-between mb-4">
             <a href="main.jsp" class="btn btn-primary">Back to Main</a>
             <a href="reporting.jsp" class="btn btn-primary">Reporting</a>
         </div>
         <div>
-            <h3>Last collection total value: <span id="lastCollectionTotal"><%= lastCollectionTotal %></span></h3>
+           	<h3>Last collection total value: <span id="lastCollectionTotal"><%= lastCollectionTotal %></span></h3>
             <h3>Total value for Last 30 Days: <span id="last30DaysTotal"><%= totalLast30Days %></span></h3>
             <h3>Total value for Last 365 Days: <span id="last365DaysTotal"><%= totalLast365Days %></span></h3>
         </div>
         <div class="row">
              <div class="d-flex justify-content-start">
             	<div class="col-5 ">
-            	<h3 class="mt-5">Add Collection to Tubz</h3>
-	            	<form action="tubzServlet" method="POST" class="mt-4">
+            	<h3 class="mt-5">Add collection to fruit machine</h3>
+	            	<form action="FruitMachineServlet" method="POST" class="mt-4">
 	                    <div class="form-group">
 	                        <label for="date">Date</label>
 	                        <input type="date" class="form-control" id="date" name="date" required>
@@ -54,8 +54,8 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
             	</div>
             	<div class="col-1"></div>
             	<div class="col-5">
-            	<h3 class="mt-5">Add Expense to Tubz</h3>
-            		<form action="tubzServlet" method="POST" class="mt-4">
+            	<h3 class="mt-5">Add expence to fruit machine</h3>
+            		<form action="FruitMachineServlet" method="POST" class="mt-4">
 	                    <div class="form-group">
 	                        <label for="expenseDate">Expense Date</label>
 	                        <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>

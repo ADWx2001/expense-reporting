@@ -32,34 +32,47 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
             <a href="reporting.jsp" class="btn btn-primary">Reporting</a>
         </div>
         <div>
-            <h3>Last Collection Total: <span id="lastCollectionTotal"><%= lastCollectionTotal %></span></h3>
-            <h3>Total for Last 30 Days: <span id="last30DaysTotal"><%= totalLast30Days %></span></h3>
-            <h3>Total for Last 365 Days: <span id="last365DaysTotal"><%= totalLast365Days %></span></h3>
+            <h3>Last collection total value: <span id="lastCollectionTotal"><%= lastCollectionTotal %></span></h3>
+            <h3>Total value for Last 30 Days: <span id="last30DaysTotal"><%= totalLast30Days %></span></h3>
+            <h3>Total value for Last 365 Days: <span id="last365DaysTotal"><%= totalLast365Days %></span></h3>
         </div>
         <div class="row">
-            <div class="col-md-8">
-                <form action="JukeBoxServlet" method="POST" class="mt-4">
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Amount</label>
-                        <input type="number" class="form-control" id="amount" name="amount" required>
-                    </div>
-                    <button type="submit" class="btn btn-success mt-2">Save</button>
-                </form>
-                <form action="JukeBoxServlet" method="POST" class="mt-4">
-                    <div class="form-group">
-                        <label for="expenseDate">Expense Date</label>
-                        <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="expenseAmount">Expense Amount</label>
-                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" required>
-                    </div>
-                    <button type="submit" class="btn btn-danger mt-2">Add Expense</button>
-                </form>
+            <div class="d-flex justify-content-start">
+            	<div class="col-5 ">
+            	<h3 class="mt-5">Add collection to JukeBox</h3>
+	            	<form action="JukeBoxServlet" method="POST" class="mt-4">
+	                    <div class="form-group">
+	                        <label for="date">Date</label>
+	                        <input type="date" class="form-control" id="date" name="date" required>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="amount">Amount</label>
+	                        <input type="number" class="form-control" id="amount" name="amount" required>
+	                    </div>
+	                    <button type="submit" class="btn btn-success mt-2">Save</button>
+	                </form>
+            	</div>
+            	<div class="col-1"></div>
+            	<div class="col-5">
+            	<h3 class="mt-5">Add expense to JukeBox</h3>
+            		<form action="JukeBoxServlet" method="POST" class="mt-4">
+	                    <div class="form-group">
+	                        <label for="expenseDate">Expense Date</label>
+	                        <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="expenseAmount">Expense Amount</label>
+	                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" required>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="expenseReason">Expense Reason</label>
+	                        <input type="text" class="form-control" id="expenseReason" name="expenseReason" required>
+	                    </div>
+	                    <button type="submit" class="btn btn-danger mt-2">Add Expense</button>
+	                </form>
+            	</div>
+                
+                
             </div>
             
         </div>
