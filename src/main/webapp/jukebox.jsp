@@ -23,9 +23,15 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+	.invalid-feedback {	
+	    display: none;
+	    color: red;
+	}
+	</style>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5 pb-5">
         <h1>Juke Box</h1>
         <div class="d-flex justify-content-between mb-4">
             <a href="main.jsp" class="btn btn-primary">Back to Main</a>
@@ -56,20 +62,54 @@ List<Expense> expenses = (List<Expense>) request.getAttribute("expenses");
             	<div class="col-5">
             	<h3 class="mt-5">Add expense to JukeBox</h3>
             		<form action="JukeBoxServlet" method="POST" class="mt-4">
-	                    <div class="form-group">
-	                        <label for="expenseDate">Expense Date</label>
-	                        <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="expenseAmount">Expense Amount</label>
-	                        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" required>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="expenseReason">Expense Reason</label>
-	                        <input type="text" class="form-control" id="expenseReason" name="expenseReason" required>
-	                    </div>
-	                    <button type="submit" class="btn btn-danger mt-2">Add Expense</button>
-	                </form>
+					    <div class="form-group">
+					        <label for="expenseDate">Expense Date</label>
+					        <input type="date" class="form-control" id="expenseDate" name="expenseDate" required>
+					    </div>
+					    <div class="form-group">
+					        <label for="expenseAmount">Expense Amount</label>
+					        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" required oninput="validateExpenseAmount()">
+					        <div class="invalid-feedback" id="expenseAmountError">Expense amount must be negative.</div>
+					    </div>
+					    <div class="form-group">
+					        <label for="expenseType">Expense Type</label>
+					        <select class="form-control" id="expenseAction" name="expenseAction" required>
+					            <option value="" disabled selected>Please select one</option>
+					            <option value="addExpense">Add Expense</option>
+					            
+					        </select>
+					    </div>
+					    <div class="form-group">
+					        <label for="expenseReason">Expense Reason</label>
+					        <input type="text" class="form-control" id="expenseReason" name="expenseReason" required>
+					    </div>
+					    <div class="form-group" >
+					        <input type="text" class="form-control" id="expenseMachine" name="expenseMachine" value="jukebox" hidden>
+					    </div>
+					    <button type="submit" class="btn btn-danger mt-2">Submit</button>
+					</form>
+						<a href="jukeboxExpenseManage.jsp">
+					<button type="submit" class="btn btn-primary mt-2">Manage Expenses</button>
+					</a>
+					
+					<script>
+						function validateExpenseAmount() {
+						    const expenseAmount = document.getElementById('expenseAmount');
+						    const expenseAmountError = document.getElementById('expenseAmountError');
+						    
+						    if (expenseAmount.value >= 0) {
+						        expenseAmount.classList.add('is-invalid');
+						        expenseAmountError.style.display = 'block';
+						    } else {
+						        expenseAmount.classList.remove('is-invalid');
+						        expenseAmountError.style.display = 'none';
+						    }
+						}
+						</script>
+						
+						
+					
+
             	</div>
                 
                 

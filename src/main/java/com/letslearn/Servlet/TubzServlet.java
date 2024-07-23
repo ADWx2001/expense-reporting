@@ -39,20 +39,31 @@ public class TubzServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try (Connection connection = getConnection()) {
             CollectionDAO collectionDAO = new CollectionDAOImpl(connection);
-            double lastCollectionTotal = collectionDAO.getLastCollectionTotal("tubz");
-            double totalLast30Days = collectionDAO.getTotalLast30Days("tubz");
-            double totalLast365Days = collectionDAO.getTotalLast365Days("tubz");
+            double lastCollectionTotalTofee = collectionDAO.getLastCollectionTotal("tubzTofee");
+            double totalLast30DaysTofee = collectionDAO.getTotalLast30Days("tubzTofee");
+            double totalLast365DaysTofee = collectionDAO.getTotalLast365Days("tubzTofee");
+            
+            double lastCollectionTotalToys = collectionDAO.getLastCollectionTotal("tubzToys");
+            double totalLast30DaysToys = collectionDAO.getTotalLast30Days("tubzToys");
+            double totalLast365DaysToys = collectionDAO.getTotalLast365Days("tubzToys");
 
             ExpenseDAO expenseDAO = new ExpenseDAOImpl(connection);
-            List<Expense> expenses = expenseDAO.getExpenses("tubz", "2023-01-01", "2023-12-31");
-
-            request.setAttribute("lastCollectionTotal", lastCollectionTotal);
-            request.setAttribute("totalLast30Days", totalLast30Days);
-            request.setAttribute("totalLast365Days", totalLast365Days);
-            request.setAttribute("expenses", expenses);
+            List<Expense> expensesTofee = expenseDAO.getExpenses("tubzTofee", "2023-01-01", "2023-12-31");
+            List<Expense> expensesToys = expenseDAO.getExpenses("tubzToys", "2023-01-01", "2023-12-31");
+            
+            request.setAttribute("lastCollectionTotalTofee", lastCollectionTotalTofee);
+            request.setAttribute("totalLast30DaysTofee", totalLast30DaysTofee);
+            request.setAttribute("totalLast365DaysTofee", totalLast365DaysTofee);
+            request.setAttribute("expensesTofee", expensesTofee);
+            
+            request.setAttribute("lastCollectionTotalToys", lastCollectionTotalToys);
+            request.setAttribute("totalLast30DaysToys", totalLast30DaysToys);
+            request.setAttribute("totalLast365DaysToys", totalLast365DaysToys);
+            request.setAttribute("expensesToys", expensesToys);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("tubz.jsp");
             dispatcher.forward(request, response);
+            
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error.");
@@ -60,30 +71,37 @@ public class TubzServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String date = request.getParameter("date");
+    	String date = request.getParameter("date");
         String amount = request.getParameter("amount");
+        String collectionMachine = request.getParameter("collectionMachine");
         String expenseDate = request.getParameter("expenseDate");
         String expenseAmount = request.getParameter("expenseAmount");
         String expenseReason = request.getParameter("expenseReason");
+        String expenseAction = request.getParameter("expenseAction");
+        String expenseMachine = request.getParameter("expenseMachine");
 
         try (Connection connection = getConnection()) {
             if (date != null && amount != null) {
                 Collection collection = new Collection();
                 collection.setDate(date);
                 collection.setAmount(Double.parseDouble(amount));
-                collection.setMachine("tubz");
+                collection.setMachine(collectionMachine);
 
                 CollectionDAO collectionDAO = new CollectionDAOImpl(connection);
                 collectionDAO.saveCollection(collection);
-            } else if (expenseDate != null && expenseAmount != null && expenseReason != null) {
+            } else if (expenseDate != null && expenseAmount != null && expenseReason != null && expenseAction != null && expenseAction.equals("addExpense")) {
                 Expense expense = new Expense();
                 expense.setDate(expenseDate);
                 expense.setAmount(Double.parseDouble(expenseAmount));
-                expense.setMachine("tubz");
+                expense.setMachine(expenseMachine);
                 expense.setReason(expenseReason);
+                expense.setAction(expenseAction);
 
                 ExpenseDAO expenseDAO = new ExpenseDAOImpl(connection);
                 expenseDAO.saveExpense(expense);
+            }else if (expenseDate != null && expenseAmount != null && expenseAction.equals("removeExpense")) {
+            	ExpenseDAO expenseDAO = new ExpenseDAOImpl(connection);
+                expenseDAO.removeExpense(expenseDate, expenseAmount, expenseAction, expenseMachine);;
             }
         } catch (SQLException e) {
             e.printStackTrace();

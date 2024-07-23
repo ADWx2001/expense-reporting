@@ -6,6 +6,7 @@ public class Expense {
     private double amount;
     private String machine;
     private String reason;
+    private String action;
 
     // Getters and Setters
     public int getId() {
@@ -22,6 +23,12 @@ public class Expense {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    public String getAction() {
+    	return action;
+    }
+    public void setAction(String action) {
+    	this.action = action;
     }
 
     public double getAmount() {

@@ -60,11 +60,13 @@ public class FruitMachineServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String date = request.getParameter("date");
+    	String date = request.getParameter("date");
         String amount = request.getParameter("amount");
         String expenseDate = request.getParameter("expenseDate");
         String expenseAmount = request.getParameter("expenseAmount");
         String expenseReason = request.getParameter("expenseReason");
+        String expenseAction = request.getParameter("expenseAction");
+        String expenseMachine = request.getParameter("expenseMachine");
 
         try (Connection connection = getConnection()) {
             if (date != null && amount != null) {
@@ -75,15 +77,19 @@ public class FruitMachineServlet extends HttpServlet {
 
                 CollectionDAO collectionDAO = new CollectionDAOImpl(connection);
                 collectionDAO.saveCollection(collection);
-            } else if (expenseDate != null && expenseAmount != null && expenseReason != null) {
+            } else if (expenseDate != null && expenseAmount != null && expenseReason != null && expenseAction != null && expenseAction.equals("addExpense")) {
                 Expense expense = new Expense();
                 expense.setDate(expenseDate);
                 expense.setAmount(Double.parseDouble(expenseAmount));
                 expense.setMachine("fruitmachine");
                 expense.setReason(expenseReason);
+                expense.setAction(expenseAction);
 
                 ExpenseDAO expenseDAO = new ExpenseDAOImpl(connection);
                 expenseDAO.saveExpense(expense);
+            }else if (expenseDate != null && expenseAmount != null && expenseAction.equals("removeExpense")) {
+            	ExpenseDAO expenseDAO = new ExpenseDAOImpl(connection);
+                expenseDAO.removeExpense(expenseDate, expenseAmount, expenseAction, expenseMachine);;
             }
         } catch (SQLException e) {
             e.printStackTrace();
